@@ -30,3 +30,5 @@ Recreating oxytrack_site-creator_1           ... done
 (5) Open a web browser to access the web page
     (5a) mysite.localhost
     (5b) mysite.localhost/login, account:Administrator, password: admin
+
+(6)
