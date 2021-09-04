@@ -1,0 +1,72 @@
+(A) Fresh  Installation and Run with the images from Oxytrack Docker hub
+
+If not, it may need to clean up the docker volume since the mariadb has content). Be careful the following command will clean up all docker volumes.
+
+$docker stop $(docker ps -qa) && docker system prune -af –volumes
+
+In frappe_docker directory
+
+1)    Copy env-local (For production, copy env-production) to .env
+      $cp env-local .env
+
+2)    $docker-compose --project-name oxytrack up -d
+
+ 
+
+(B) To build the images
+
+In frappe_docker directory
+
+1)    Docker build . -f build/frappe-worker/Dockerfile -t valuefabric/oxytrack:frappe-worker
+
+2)    Docker build . -f build/frappe-socketio/Dockerfile -t valuefabric/oxytrack:frappe-socketio
+
+3)    Docker build . -f build/frappe-nginx/Dockerfile -t valuefabric/oxytrack:frappe-nginx
+
+4)    Docker build . -f build/erpnext-worker/Dockerfile -t valuefabric/oxytrack:erpnext-worker
+
+5)    Docker build . -f build/erpnext-nginx/Dockerfile -t valuefabric/oxytrack:erpnext-nginx
+
+ 
+
+(C) To push docker images to Oxytrack docker hub manually
+
+$ docker push valuefabric/oxytrack:frappe-worker
+
+$ docker push valuefabric/oxytrack:frappe-socketio
+
+$ docker push valuefabric/oxytrack:frappe-nginx
+
+$ docker push valuefabric/oxytrack:erpnext-worker
+
+$ docker push valuefabric/oxytrack:erpnext-nginx
+
+ 
+(D) To pull docker images from Oxytrack docker hub manually
+
+$ docker pull valuefabric/oxytrack:frappe-worker
+
+$ docker pull valuefabric/oxytrack:frappe-socketio
+
+$ docker pull valuefabric/oxytrack:frappe-nginx
+
+$ docker pull valuefabric/oxytrack:erpnext-worker
+
+$ docker pull valuefabric/oxytrack:erpnext-nginx
+
+ 
+(E) Current working environment
+
+1)    All Github repositories are in public
+
+2)    All Docker repositories are in public (during docker build image does not inherit my account access)
+     (a) In your frappe_docker git directory, just perform the local setup now, copy the env-local to .env
+     $cp env-local .env
+
+     (b) If need to stop all running containers first
+     $ docker container stop $(docker container list -q)
+
+(F) Open a web browser to access the web page
+    mysite.localhost
+    mysite.localhost/login, account:Administrator, password: admin
+
