@@ -70,3 +70,15 @@ $ docker pull valuefabric/oxytrack:erpnext-nginx
     mysite.localhost
     mysite.localhost/login, account:Administrator, password: admin
 
+(G) Create a new site
+1) Create ERPNext site, each site use different database but on the same dbhost
+# mariadb root password: admin, Administrator password: admin
+docker run -e "SITE_NAME=oxytrack.localhost" -e "DB_ROOT_USER=root" -e "MYSQL_ROOT_PASSWORD=admin" -e "ADMIN_PASSWORD=admin" -e "INSTALL_APPS=erpnext" -v oxytrack_sites-vol:/home/frappe/frappe-bench/sites --network oxytrack_default valuefabric/oxytrack:erpnext-worker new
+
+2) update .env for the SITE_NAME and SITES
+SITE_NAME=mysite.localhost, oxytrack.localhost
+SITES=`mysite.localhost`,`oxytrack.localhost`
+
+3) open a web brower to access the web page
+   oxytrack.localhost
+   oxytrack.localhost/login, account:Administrator, password: admin
